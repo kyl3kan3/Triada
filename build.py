@@ -51,50 +51,35 @@ STATE_DISCLOSURE_PLACEHOLDER = (
 )
 
 # ---------------------------------------------------------------------------
-# Brand assets — the "triad" mark: three nested triangles.
+# Brand assets — the "triad" mark drawn in fine line-work.
 # ---------------------------------------------------------------------------
 
 MARK_SVG = """<svg class="mark" viewBox="0 0 44 40" aria-hidden="true" focusable="false">
-  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
-  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="currentColor" opacity=".28"/>
-  <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor"/>
+  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.1"/>
+  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="none" stroke="currentColor" stroke-width="1.1"/>
+  <path d="M22 22.5 L26.2 30.5 H17.8 Z" fill="currentColor"/>
+</svg>"""
+
+HERO_LINEART = """<svg class="hero-lines" viewBox="0 0 400 360" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M200 10 L390 350 H10 Z"/>
+    <path d="M200 52 L366 350 H34 Z" opacity=".75"/>
+    <path d="M200 94 L342 350 H58 Z" opacity=".55"/>
+    <path d="M200 136 L318 350 H82 Z" opacity=".4"/>
+    <path d="M200 178 L294 350 H106 Z" opacity=".3"/>
+    <path d="M200 220 L270 350 H130 Z" opacity=".22"/>
+    <path d="M200 262 L246 350 H154 Z" opacity=".16"/>
+  </g>
+  <path d="M200 296 L226 350 H174 Z" fill="currentColor" opacity=".5"/>
 </svg>"""
 
 FAVICON = (
     "data:image/svg+xml,"
     "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 40'%3E"
-    "%3Cpath d='M22 3 L41 37 H3 Z' fill='none' stroke='%23c2a25c' stroke-width='2.4'/%3E"
-    "%3Cpath d='M22 13.5 L31.5 30.5 H12.5 Z' fill='%23c2a25c' opacity='.35'/%3E"
-    "%3Cpath d='M22 21 L26.8 30.5 H17.2 Z' fill='%23c2a25c'/%3E%3C/svg%3E"
+    "%3Cpath d='M22 3 L41 37 H3 Z' fill='none' stroke='%239a7b3f' stroke-width='2'/%3E"
+    "%3Cpath d='M22 13.5 L31.5 30.5 H12.5 Z' fill='none' stroke='%239a7b3f' stroke-width='2'/%3E"
+    "%3Cpath d='M22 22.5 L26.2 30.5 H17.8 Z' fill='%239a7b3f'/%3E%3C/svg%3E"
 )
-
-# Custom line-icon set (48px grid, 1.5px stroke, drawn for this site).
-ICONS = {
-    "compass": """<svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
-  <circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <path d="M31 17 L26.5 26.5 L17 31 L21.5 21.5 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <circle cx="24" cy="24" r="1.6" fill="currentColor"/>
-  <path d="M24 3.5 V7 M24 41 V44.5 M3.5 24 H7 M41 24 H44.5" stroke="currentColor" stroke-width="1.5"/>
-</svg>""",
-    "growth": """<svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
-  <path d="M6 40 H42" stroke="currentColor" stroke-width="1.5"/>
-  <path d="M8 33 L18 23 L25 29 L40 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M32.5 11 H41 V19.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <circle cx="18" cy="23" r="1.8" fill="currentColor"/>
-  <circle cx="25" cy="29" r="1.8" fill="currentColor"/>
-</svg>""",
-    "shield": """<svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
-  <path d="M24 5 L40 11 V23 C40 33.5 33.5 40.5 24 44 C14.5 40.5 8 33.5 8 23 V11 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M17 24 L22 29 L31.5 18.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>""",
-    "ledger": """<svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
-  <rect x="10" y="6" width="28" height="36" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <path d="M17 15 H31 M17 22 H31 M17 29 H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M28.5 33.5 L37 25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <circle cx="29.5" cy="26" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="36" cy="32.5" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-</svg>""",
-}
 
 DISCLOSURES = f"""
       <div class="disclosures">
@@ -187,26 +172,23 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span class="topbar-address">{ADDRESS_LINES[0]}, {ADDRESS_LINES[1]}</span>
-      <span class="topbar-phones">
-        <a href="tel:+16182813444">Office {PHONE_OFFICE}</a>
-        <span class="dot" aria-hidden="true"></span>
-        <a href="tel:+18448949822">Toll-Free {PHONE_TOLLFREE}</a>
-      </span>
+  <div class="topline">
+    <div class="frame topline-inner">
+      <span class="topline-item">{ADDRESS_LINES[0]}, {ADDRESS_LINES[1]}</span>
+      <span class="topline-item"><a href="tel:+16182813444">Office {PHONE_OFFICE}</a></span>
+      <span class="topline-item"><a href="tel:+18448949822">Toll-Free {PHONE_TOLLFREE}</a></span>
     </div>
   </div>
 
-  <header class="site-header" id="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Triada Advisors home">
+  <header class="masthead" id="site-header">
+    <div class="frame masthead-inner">
+      <a class="wordmark" href="/" aria-label="Triada Advisors home">
         {MARK_SVG}
-        <span class="brand-text">Triada<em>Advisors</em></span>
+        <span>Triada&thinsp;<i>Advisors</i></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
         <span class="sr-only">Menu</span>
-        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main navigation">
         <ul>
@@ -220,15 +202,17 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
 {body}
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-rule" aria-hidden="true"></div>
-    <div class="container footer-grid">
-      <div class="footer-brand-col">
-        <a class="brand brand-footer" href="/">
+  <footer class="colophon">
+    <div class="frame colophon-grid">
+      <div class="colophon-brand">
+        <a class="wordmark wordmark-light" href="/">
           {MARK_SVG}
-          <span class="brand-text">Triada<em>Advisors</em></span>
+          <span>Triada&thinsp;<i>Advisors</i></span>
         </a>
-        <p class="footer-tagline">Plan wisely. Invest intently. Live fully.</p>
+        <p class="colophon-tagline">Plan wisely. Invest intently.<br>Live fully.</p>
+      </div>
+      <div>
+        <h2>Office</h2>
         <p>{address}</p>
         <p>
           Office <a href="tel:+16182813444">{PHONE_OFFICE}</a><br>
@@ -242,7 +226,7 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
       </div>
       <nav aria-label="Footer">
         <h2>Explore</h2>
-        <ul class="footer-links">
+        <ul class="colophon-links">
           <li><a href="/about-us/">About Us</a></li>
           <li><a href="/our-solutions/">Our Solutions</a></li>
           <li><a href="/your-experience/">Your Experience</a></li>
@@ -254,7 +238,7 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
       </nav>
       <nav aria-label="Resources">
         <h2>Resources</h2>
-        <ul class="footer-links">
+        <ul class="colophon-links">
           <li><a href="{LINKS['brokercheck']}" rel="noopener" target="_blank">FINRA BrokerCheck</a></li>
           <li><a href="{LINKS['lpl_crs']}" rel="noopener" target="_blank">LPL Relationship Summary (Form CRS)</a></li>
           <li><a href="{LINKS['lpl']}" rel="noopener" target="_blank">LPL Financial</a></li>
@@ -264,7 +248,7 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
         </ul>
       </nav>
     </div>
-    <div class="container">
+    <div class="frame">
 {DISCLOSURES}
       <p class="copyright">&copy; 2026 Triada Advisors. All rights reserved.</p>
     </div>
@@ -337,24 +321,34 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
 """
 
 
-def kicker_header(kicker, heading, *, light=False, center=False):
-    cls = "section-head"
-    if light:
-        cls += " light"
-    if center:
-        cls += " center"
-    return f"""        <div class="{cls} reveal">
-          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>{kicker}</p>
-          <h2>{heading}</h2>
-        </div>"""
+def chapter_open(index, label, *, dark=False):
+    """Magazine-style section: numbered margin label + content column."""
+    cls = "chapter dark" if dark else "chapter"
+    return f"""    <section class="{cls}">
+      <div class="frame chapter-grid">
+        <div class="chapter-label reveal">
+          <span class="chapter-index">{index}</span>
+          <span class="chapter-name">{label}</span>
+        </div>
+        <div class="chapter-body">
+"""
+
+CHAPTER_CLOSE = """        </div>
+      </div>
+    </section>
+"""
 
 
-def page_hero(kicker, heading, lede=""):
-    lede_html = f'\n        <p class="lede reveal">{lede}</p>' if lede else ""
-    return f"""    <section class="page-hero">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="container">
-        <p class="kicker reveal"><span class="kicker-rule" aria-hidden="true"></span>{kicker}</p>
+def arrow_link(href, label):
+    return (f'<a class="arrow-link" href="{href}">{label}'
+            f'<span class="arrow" aria-hidden="true">&#8594;</span></a>')
+
+
+def page_hero(eyebrow, heading, lede=""):
+    lede_html = f'\n        <p class="hero-lede reveal">{lede}</p>' if lede else ""
+    return f"""    <section class="page-plate">
+      <div class="frame">
+        <p class="eyebrow reveal">{eyebrow}</p>
         <h1 class="reveal">{heading}</h1>{lede_html}
       </div>
     </section>
@@ -516,65 +510,65 @@ TEAM_GROUPS = [
 
 
 def initials(m):
-    return "".join(part[0] for part in m["slug"].split("-")[:2]).upper()
+    return ".".join(part[0] for part in m["slug"].split("-")[:2]).upper() + "."
 
 
-def team_card(m, delay):
-    return f"""          <a class="team-card reveal" style="--d:{delay}ms" href="/team/{m['slug']}/">
-            <span class="portrait" aria-hidden="true"><span>{initials(m)}</span></span>
-            <span class="team-name">{m['name']}</span>
-            <span class="team-title">{m['title']}</span>
-            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
-          </a>"""
+def team_plate(m, idx, delay):
+    return f"""            <a class="plate reveal" style="--d:{delay}ms" href="/team/{m['slug']}/">
+              <span class="plate-top">
+                <span class="plate-index">{idx:02d}</span>
+                <span class="plate-mono" aria-hidden="true">{initials(m)}</span>
+              </span>
+              <span class="plate-name">{m['name']}</span>
+              <span class="plate-title">{m['title']}</span>
+              <span class="plate-cta">Profile <span class="arrow" aria-hidden="true">&#8594;</span></span>
+            </a>"""
 
 
 def team_index_body():
-    sections = []
-    for group, label in TEAM_GROUPS:
-        cards = []
-        d = 0
+    out = [page_hero(
+        "The people behind the plan",
+        "Our<br><em>Team.</em>",
+        "A teamwork approach adds broader perspective &mdash; and greater "
+        "benefit &mdash; to every client relationship.",
+    )]
+    n = 0
+    for gi, (group, label) in enumerate(TEAM_GROUPS, start=1):
+        plates, d = [], 0
         for m in TEAM:
             if m["group"] != group:
                 continue
-            cards.append(team_card(m, d))
-            d += 80
-        cards_html = "\n".join(cards)
-        sections.append(f"""    <section class="section">
-      <div class="container">
-{kicker_header(label, group)}
-        <div class="team-grid">
-{cards_html}
-        </div>
-      </div>
-    </section>""")
-    sections_html = "\n".join(sections)
-    return page_hero(
-        "The people behind the plan",
-        "Our Team",
-        "A teamwork approach adds broader perspective &mdash; and greater "
-        "benefit &mdash; to every client relationship.",
-    ) + f"""
-{sections_html}
-"""
+            n += 1
+            plates.append(team_plate(m, n, d))
+            d += 90
+        plates_html = "\n".join(plates)
+        out.append(chapter_open(f"{gi:02d}", label) + f"""          <h2 class="chapter-heading reveal">{group}</h2>
+          <div class="plate-grid">
+{plates_html}
+          </div>
+""" + CHAPTER_CLOSE)
+    return "\n".join(out)
 
 
 def team_member_body(m):
     first = m["name"].split(",")[0].split()[0]
-    return page_hero(m["group"], m["name"], m["title"]) + f"""
-    <section class="section member">
-      <div class="container member-grid">
-        <div class="member-photo reveal" aria-hidden="true"><span>{initials(m)}</span></div>
-        <div class="member-body reveal">
-          <p class="member-lede">{m['bio']}</p>
-          <p>
+    return page_hero(m["group"], f"{m['name'].replace(', ', ',<br><em>') + ('</em>' if ',' in m['name'] else '')}", m["title"]) + f"""
+    <section class="chapter">
+      <div class="frame chapter-grid">
+        <div class="chapter-label reveal">
+          <span class="plate-mono plate-mono-lg" aria-hidden="true">{initials(m)}</span>
+        </div>
+        <div class="chapter-body">
+          <p class="statement reveal">{m['bio']}</p>
+          <p class="reveal">
             To connect with {first} or any member of the Triada Advisors
             team, call our office at
             <a href="tel:+16182813444">{PHONE_OFFICE}</a> or
             <a href="/contact-us/">send us a message</a>.
           </p>
-          <div class="btn-row">
-            <a class="btn" href="/contact-us/">Start a conversation</a>
-            <a class="btn btn-ghost" href="/team/">&larr; Back to the team</a>
+          <div class="link-row reveal">
+            {arrow_link('/contact-us/', 'Start a conversation')}
+            {arrow_link('/team/', 'Back to the team')}
           </div>
         </div>
       </div>
@@ -587,483 +581,406 @@ def team_member_body(m):
 # ---------------------------------------------------------------------------
 
 HOME_BODY = f"""    <section class="hero">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="hero-triad" aria-hidden="true">
-        <svg viewBox="0 0 44 40">
-          <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width=".7"/>
-          <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="none" stroke="currentColor" stroke-width=".7"/>
-          <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor" opacity=".5"/>
-        </svg>
-      </div>
-      <div class="container hero-inner">
-        <p class="kicker reveal is-visible"><span class="kicker-rule" aria-hidden="true"></span>Columbia, Illinois &middot; Serving clients nationwide</p>
-        <h1 class="reveal is-visible">Feel confident in your <em>financial future.</em></h1>
-        <p class="lede reveal is-visible">
-          For more than two decades, Triada Advisors has helped family
-          business owners, retirees, and wealth builders pursue their
-          long-term goals through disciplined financial planning, investment
-          management, and insurance consulting.
-        </p>
-        <div class="btn-row reveal is-visible">
-          <a class="btn btn-gold" href="/contact-us/">Start the conversation</a>
-          <a class="btn btn-ghost-light" href="/your-experience/">Discover your experience</a>
-        </div>
-      </div>
-      <div class="hero-scroll" aria-hidden="true"><span></span></div>
-    </section>
-
-    <section class="section">
-      <div class="container split">
-        <div class="split-lead reveal">
-          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Our philosophy</p>
-          <h2 class="display">Built on trust.<br><em>Focused on you.</em></h2>
-        </div>
-        <div class="split-body">
-          <p class="reveal">
-            Our firm is rooted in a simple belief: earning your trust and
-            caring about your best interests come before everything else.
-            When we work with clients, it is never merely transactional
-            &mdash; it is personal. We are proud to walk alongside you
-            through life&rsquo;s biggest milestones, from building a career
-            and starting a family to selling a business and stepping into
-            retirement.
+      <div class="frame hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow reveal is-visible">Columbia, Illinois &middot; Serving clients nationwide</p>
+          <h1 class="reveal is-visible">Feel confident<br>in your<br><em>financial future.</em></h1>
+          <p class="hero-lede reveal is-visible">
+            For more than two decades, Triada Advisors has helped family
+            business owners, retirees, and wealth builders pursue their
+            long-term goals through disciplined financial planning,
+            investment management, and insurance consulting.
           </p>
-          <p class="reveal">
-            Based in the heart of Columbia, Illinois, we serve neighbors here
-            at home and clients across the country. Through our relationship
-            with Cornerstone Wealth Management and our alignment with LPL
-            Financial, we combine the personal service of a local firm with
-            the resources of a large institution &mdash; and the freedom to
-            offer objective, unbiased advice.
+          <div class="link-row reveal is-visible">
+            <a class="btn" href="/contact-us/">Start the conversation</a>
+            {arrow_link('/your-experience/', 'Discover your experience')}
+          </div>
+        </div>
+        <div class="hero-figure reveal is-visible" aria-hidden="true">
+          {HERO_LINEART}
+        </div>
+      </div>
+      <div class="frame hero-foot" aria-hidden="true">
+        <span>Est. two decades of stewardship</span>
+        <span>Financial planning &middot; Investments &middot; Insurance</span>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+{chapter_open("01", "Our philosophy")}          <p class="statement reveal">
+            Earning your trust and caring about your best interests come
+            before everything else. When we work with clients, it is never
+            merely transactional &mdash; <em>it is personal.</em>
           </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section band">
-      <div class="container">
-        <div class="section-head-row">
-{kicker_header("What we do", "Three disciplines. One plan.")}
-          <a class="text-link reveal" href="/our-solutions/">All solutions <span aria-hidden="true">&rarr;</span></a>
-        </div>
-        <div class="card-grid">
-          <a class="card reveal" style="--d:0ms" href="/our-solutions/">
-            {ICONS['compass']}
-            <h3>Financial Planning</h3>
-            <p>A sound plan addresses every corner of your financial life
-            &mdash; not just your portfolio.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">&rarr;</span></span>
-          </a>
-          <a class="card reveal" style="--d:120ms" href="/our-solutions/">
-            {ICONS['growth']}
-            <h3>Investment Management</h3>
-            <p>No one-size-fits-all models. Every strategy is customized to
-            your needs &mdash; and yours alone.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">&rarr;</span></span>
-          </a>
-          <a class="card reveal" style="--d:240ms" href="/our-solutions/">
-            {ICONS['shield']}
-            <h3>Insurance Consulting</h3>
-            <p>Experienced guidance to assess your coverage and address the
-            risks that matter.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">&rarr;</span></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section panel-dark">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="container split align-center">
-        <div class="reveal">
-          <p class="kicker light"><span class="kicker-rule" aria-hidden="true"></span>Your experience</p>
-          <h2 class="display light">Living <em>Intently</em>&trade;</h2>
-          <p class="lede-sm">
+          <div class="prose-cols">
+            <p class="reveal">
+              We are proud to walk alongside you through life&rsquo;s biggest
+              milestones, from building a career and starting a family to
+              selling a business and stepping into retirement. Our firm is
+              rooted in that simple conviction, and it shapes how we plan,
+              how we invest, and how we communicate.
+            </p>
+            <p class="reveal">
+              Based in the heart of Columbia, Illinois, we serve neighbors
+              here at home and clients across the country. Through our
+              relationship with Cornerstone Wealth Management and our
+              alignment with LPL Financial, we combine the personal service
+              of a local firm with the resources of a large institution
+              &mdash; and the freedom to offer objective, unbiased advice.
+            </p>
+          </div>
+{CHAPTER_CLOSE}
+{chapter_open("02", "What we do")}          <h2 class="chapter-heading reveal">Three disciplines.<br><em>One plan.</em></h2>
+          <div class="ledger">
+            <a class="ledger-row reveal" href="/our-solutions/">
+              <span class="ledger-num">01</span>
+              <span class="ledger-title">Financial Planning</span>
+              <span class="ledger-desc">A sound plan addresses every corner
+              of your financial life &mdash; not just your portfolio.</span>
+              <span class="arrow" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="ledger-row reveal" href="/our-solutions/">
+              <span class="ledger-num">02</span>
+              <span class="ledger-title">Investment Management</span>
+              <span class="ledger-desc">No one-size-fits-all models. Every
+              strategy is customized to your needs &mdash; and yours alone.</span>
+              <span class="arrow" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="ledger-row reveal" href="/our-solutions/">
+              <span class="ledger-num">03</span>
+              <span class="ledger-title">Insurance Consulting</span>
+              <span class="ledger-desc">Experienced guidance to assess your
+              coverage and address the risks that matter.</span>
+              <span class="arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+{CHAPTER_CLOSE}
+{chapter_open("03", "Your experience", dark=True)}          <h2 class="chapter-heading reveal">Living <em>Intently.</em>&trade;</h2>
+          <p class="statement reveal">
             Wealth is a means, not an end. Our Living Intently experience is
             an interactive way to assess your total well-being and shape
             meaningful personal and financial life goals &mdash; so your
             money serves the life you actually want to live.
           </p>
-          <a class="btn btn-gold" href="/your-experience/">Discover your experience</a>
-        </div>
-        <div class="stat-stack reveal">
-          <div class="stat">
-            <span class="stat-num"><span data-count="20" data-suffix="+">20+</span></span>
-            <span class="stat-label">Years serving clients</span>
+          <div class="figures reveal">
+            <div class="figure">
+              <span class="figure-num"><span data-count="20" data-suffix="+">20+</span></span>
+              <span class="figure-label">Years serving clients</span>
+            </div>
+            <div class="figure">
+              <span class="figure-num"><span data-count="3">3</span></span>
+              <span class="figure-label">Advisors, one team</span>
+            </div>
+            <div class="figure">
+              <span class="figure-num"><span data-count="1">1</span></span>
+              <span class="figure-label">Focus: your best interests</span>
+            </div>
           </div>
-          <div class="stat">
-            <span class="stat-num"><span data-count="3">3</span></span>
-            <span class="stat-label">Advisors, one coordinated team</span>
+          <div class="link-row reveal">
+            {arrow_link('/your-experience/', 'Discover your experience')}
           </div>
-          <div class="stat">
-            <span class="stat-num"><span data-count="1">1</span></span>
-            <span class="stat-label">Focus: your best interests</span>
+{CHAPTER_CLOSE}
+{chapter_open("04", "Your advisors")}          <h2 class="chapter-heading reveal">A team<br><em>in your corner.</em></h2>
+          <div class="plate-grid">
+{team_plate(TEAM[0], 1, 0)}
+{team_plate(TEAM[1], 2, 90)}
+{team_plate(TEAM[2], 3, 180)}
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head-row">
-{kicker_header("Your advisors", "A team in your corner")}
-          <a class="text-link reveal" href="/team/">Meet everyone <span aria-hidden="true">&rarr;</span></a>
-        </div>
-        <div class="team-grid team-grid-3">
-{team_card(TEAM[0], 0)}
-{team_card(TEAM[1], 120)}
-{team_card(TEAM[2], 240)}
-        </div>
-      </div>
-    </section>
-
-    <section class="quote-band">
-      <div class="container reveal">
-        <div class="quote-mark" aria-hidden="true">{MARK_SVG}</div>
+          <div class="link-row reveal">
+            {arrow_link('/team/', 'Meet everyone')}
+          </div>
+{CHAPTER_CLOSE}
+    <section class="epigraph">
+      <div class="frame reveal">
+        {MARK_SVG}
         <blockquote>
-          Establishing trust and caring about our clients&rsquo; best
-          interests are of the utmost importance to us. It is never merely
-          transactional &mdash; it is personal.
+          &ldquo;Establishing trust and caring about our clients&rsquo; best
+          interests are of the utmost importance to us.&rdquo;
         </blockquote>
-        <p class="quote-attr">The Triada Advisors philosophy</p>
+        <p class="epigraph-attr">The Triada Advisors philosophy</p>
       </div>
     </section>
 
-    <section class="cta-band">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="container reveal">
-        <h2 class="display light">Ready to take <em>the next step?</em></h2>
-        <p>Call us at <a href="tel:+16182813444">{PHONE_OFFICE}</a> or send a
-        message &mdash; we&rsquo;d be glad to talk.</p>
-        <a class="btn btn-gold" href="/contact-us/">Contact Triada Advisors</a>
+    <section class="coda">
+      <div class="frame coda-grid">
+        <h2 class="reveal">Ready to take<br><em>the next step?</em></h2>
+        <div class="coda-body reveal">
+          <p>Call us at <a href="tel:+16182813444">{PHONE_OFFICE}</a> or send
+          a message &mdash; we&rsquo;d be glad to talk.</p>
+          <a class="btn" href="/contact-us/">Contact Triada Advisors</a>
+        </div>
       </div>
     </section>
 """
 
 ABOUT_BODY = page_hero(
     "More than 20 years of stewardship",
-    "About <em>Us</em>",
+    "About<br><em>Us.</em>",
     "Supporting the financial success and wellness of our clients for more "
     "than two decades.",
 ) + f"""
-    <section class="section">
-      <div class="container split">
-        <div class="split-lead reveal">
-          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Who we are</p>
-          <h2 class="display">Rooted in Columbia.<br><em>Reaching nationwide.</em></h2>
-        </div>
-        <div class="split-body">
-          <p class="reveal">
-            Based in Columbia, Illinois, Triada Advisors provides
-            comprehensive investment management, insurance, and financial
-            planning services. For more than two decades we have worked with
-            family business owners, retirees, and wealth builders to help
-            maximize their capital for long-term prosperity and growth.
+{chapter_open("01", "Who we are")}          <p class="statement reveal">
+            Rooted in Columbia, Illinois. Reaching nationwide. Built on the
+            belief that trust is earned <em>one family at a time.</em>
           </p>
-          <p class="reveal">
-            Establishing trust and caring about our clients&rsquo; best
-            interests are of the utmost importance to us. That conviction
-            shapes how we plan, how we invest, and how we communicate
-            &mdash; in plain language, with your goals at the center.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section band">
-      <div class="container">
-{kicker_header("How we're built", "Independent by design")}
-        <div class="pillar-grid">
-          <div class="pillar reveal" style="--d:0ms">
-            <span class="pillar-num" aria-hidden="true">01</span>
-            <h3>A local firm, personally invested</h3>
-            <p>You work directly with advisors who know you, your family,
-            and your goals &mdash; neighbors, not a call center.</p>
+          <div class="prose-cols">
+            <p class="reveal">
+              Triada Advisors provides comprehensive investment management,
+              insurance, and financial planning services. For more than two
+              decades we have worked with family business owners, retirees,
+              and wealth builders to help maximize their capital for
+              long-term prosperity and growth.
+            </p>
+            <p class="reveal">
+              Establishing trust and caring about our clients&rsquo; best
+              interests are of the utmost importance to us. That conviction
+              shapes how we plan, how we invest, and how we communicate
+              &mdash; in plain language, with your goals at the center.
+            </p>
           </div>
-          <div class="pillar reveal" style="--d:120ms">
-            <span class="pillar-num" aria-hidden="true">02</span>
-            <h3>Institutional resources</h3>
-            <p>Through our relationship with Cornerstone Wealth Management,
-            LLC, clients receive tailored service with access to the same
-            caliber of resources as large institutions.</p>
+{CHAPTER_CLOSE}
+{chapter_open("02", "How we're built")}          <h2 class="chapter-heading reveal">Independent<br><em>by design.</em></h2>
+          <div class="ledger">
+            <div class="ledger-row reveal">
+              <span class="ledger-num">01</span>
+              <span class="ledger-title">A local firm, personally invested</span>
+              <span class="ledger-desc">You work directly with advisors who
+              know you, your family, and your goals &mdash; neighbors, not a
+              call center.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">02</span>
+              <span class="ledger-title">Institutional resources</span>
+              <span class="ledger-desc">Through our relationship with
+              Cornerstone Wealth Management, LLC, clients receive tailored
+              service with access to the same caliber of resources as large
+              institutions.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">03</span>
+              <span class="ledger-title">Objective, unbiased advice</span>
+              <span class="ledger-desc">Aligned with LPL Financial &mdash;
+              one of the nation&rsquo;s largest independent broker-dealers
+              &mdash; we are free to recommend what serves you. No
+              proprietary products. No hidden agendas.</span>
+            </div>
           </div>
-          <div class="pillar reveal" style="--d:240ms">
-            <span class="pillar-num" aria-hidden="true">03</span>
-            <h3>Objective, unbiased advice</h3>
-            <p>Aligned with LPL Financial &mdash; one of the nation&rsquo;s
-            largest independent broker-dealers &mdash; we are free to
-            recommend what serves you. No proprietary products. No hidden
-            agendas.</p>
+{CHAPTER_CLOSE}
+{chapter_open("03", "Who we serve", dark=True)}          <h2 class="chapter-heading reveal">Clients at<br><em>every stage.</em></h2>
+          <div class="ledger ledger-dark">
+            <div class="ledger-row reveal">
+              <span class="ledger-num">01</span>
+              <span class="ledger-title">Family Business Owners</span>
+              <span class="ledger-desc">Coordinating business and personal
+              wealth, succession, and the transition you&rsquo;ve worked a
+              lifetime to earn.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">02</span>
+              <span class="ledger-title">Retirees</span>
+              <span class="ledger-desc">Turning savings into dependable
+              income and protecting what you&rsquo;ve built for the people
+              you love.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">03</span>
+              <span class="ledger-title">Wealth Builders</span>
+              <span class="ledger-desc">Disciplined strategies for growing
+              careers and growing families &mdash; so today&rsquo;s
+              decisions compound into tomorrow&rsquo;s freedom.</span>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-{kicker_header("Who we serve", "Clients at every stage")}
-        <div class="card-grid">
-          <div class="card reveal" style="--d:0ms">
-            <h3>Family Business Owners</h3>
-            <p>Coordinating business and personal wealth, succession, and
-            the transition you&rsquo;ve worked a lifetime to earn.</p>
+          <div class="link-row reveal">
+            {arrow_link('/your-experience/', 'See what working with us looks like')}
           </div>
-          <div class="card reveal" style="--d:120ms">
-            <h3>Retirees</h3>
-            <p>Turning savings into dependable income and protecting what
-            you&rsquo;ve built for the people you love.</p>
-          </div>
-          <div class="card reveal" style="--d:240ms">
-            <h3>Wealth Builders</h3>
-            <p>Disciplined strategies for growing careers and growing
-            families &mdash; so today&rsquo;s decisions compound into
-            tomorrow&rsquo;s freedom.</p>
-          </div>
-        </div>
-        <div class="btn-row reveal">
-          <a class="btn" href="/your-experience/">See what working with us looks like</a>
-        </div>
-      </div>
-    </section>
-"""
+{CHAPTER_CLOSE}"""
 
 SOLUTIONS_BODY = page_hero(
     "Comprehensive by design",
-    "Our <em>Solutions</em>",
+    "Our<br><em>Solutions.</em>",
     "Expertise and guidance to help turn your life&rsquo;s goals into "
     "reality.",
 ) + f"""
-    <section class="section">
-      <div class="container solutions-list">
-        <article class="solution reveal">
-          <span class="solution-num" aria-hidden="true">01</span>
-          <div class="solution-icon">{ICONS['compass']}</div>
-          <div>
-            <h2>Financial Planning</h2>
-            <p>
-              A strong, sound financial plan encompasses many different
-              aspects of your financial future &mdash; cash flow, retirement,
-              taxes, education, estate considerations, and the goals that are
-              uniquely yours. We build plans that connect those pieces into
-              one clear picture, then revisit them as your life evolves.
-            </p>
-          </div>
-        </article>
-        <article class="solution reveal">
-          <span class="solution-num" aria-hidden="true">02</span>
-          <div class="solution-icon">{ICONS['growth']}</div>
-          <div>
-            <h2>Investment Management</h2>
-            <p>
-              Rather than relying on a single solution or a model portfolio,
-              we customize each strategy based on your needs &mdash; and your
-              needs alone. Portfolios are managed with discipline and
-              supported by the Cornerstone Wealth Portfolios investment team,
-              giving you institutional-caliber research with personal
-              accountability.
-            </p>
-          </div>
-        </article>
-        <article class="solution reveal">
-          <span class="solution-num" aria-hidden="true">03</span>
-          <div class="solution-icon">{ICONS['shield']}</div>
-          <div>
-            <h2>Insurance Consulting</h2>
-            <p>
-              With deep experience in the insurance marketplace and knowledge
-              of the universe of options available, our advisors help you
-              address insurance needs and assess appropriate coverage &mdash;
-              protecting your income, your family, and your plan against the
-              unexpected.
-            </p>
-          </div>
-        </article>
-        <article class="solution reveal">
-          <span class="solution-num" aria-hidden="true">04</span>
-          <div class="solution-icon">{ICONS['ledger']}</div>
-          <div>
-            <h2>Tax Coordination</h2>
-            <p>
-              Through Triada Tax Services LLC and the CPA credentials on our
-              team, we help clients keep their tax picture and financial plan
-              working together instead of at cross purposes.
-            </p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="container reveal">
-        <h2 class="display light">Not sure <em>where to start?</em></h2>
-        <p>Every engagement begins with a conversation about you.</p>
-        <a class="btn btn-gold" href="/contact-us/">Talk with an advisor</a>
+{chapter_open("01", "Financial Planning")}          <h2 class="chapter-heading reveal">Every corner of your<br><em>financial life.</em></h2>
+          <p class="reveal">
+            A strong, sound financial plan encompasses many different
+            aspects of your financial future &mdash; cash flow, retirement,
+            taxes, education, estate considerations, and the goals that are
+            uniquely yours. We build plans that connect those pieces into
+            one clear picture, then revisit them as your life evolves.
+          </p>
+{CHAPTER_CLOSE}
+{chapter_open("02", "Investment Management")}          <h2 class="chapter-heading reveal">Your needs &mdash;<br><em>and yours alone.</em></h2>
+          <p class="reveal">
+            Rather than relying on a single solution or a model portfolio,
+            we customize each strategy based on your needs. Portfolios are
+            managed with discipline and supported by the Cornerstone Wealth
+            Portfolios investment team, giving you institutional-caliber
+            research with personal accountability.
+          </p>
+{CHAPTER_CLOSE}
+{chapter_open("03", "Insurance Consulting")}          <h2 class="chapter-heading reveal">Protection for<br><em>the unexpected.</em></h2>
+          <p class="reveal">
+            With deep experience in the insurance marketplace and knowledge
+            of the universe of options available, our advisors help you
+            address insurance needs and assess appropriate coverage &mdash;
+            protecting your income, your family, and your plan.
+          </p>
+{CHAPTER_CLOSE}
+{chapter_open("04", "Tax Coordination")}          <h2 class="chapter-heading reveal">Working together,<br><em>not at cross purposes.</em></h2>
+          <p class="reveal">
+            Through Triada Tax Services LLC and the CPA credentials on our
+            team, we help clients keep their tax picture and financial plan
+            aligned.
+          </p>
+{CHAPTER_CLOSE}
+    <section class="coda">
+      <div class="frame coda-grid">
+        <h2 class="reveal">Not sure<br><em>where to start?</em></h2>
+        <div class="coda-body reveal">
+          <p>Every engagement begins with a conversation about you.</p>
+          <a class="btn" href="/contact-us/">Talk with an advisor</a>
+        </div>
       </div>
     </section>
 """
 
 EXPERIENCE_BODY = page_hero(
     "Living Intently&trade;",
-    "Your <em>Experience</em>",
+    "Your<br><em>Experience.</em>",
     "An interactive approach to total well-being &mdash; and a plan with a "
     "&ldquo;why&rdquo; behind every number.",
-) + """
-    <section class="section">
-      <div class="container split">
-        <div class="split-lead reveal">
-          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>More than money</p>
-          <h2 class="display">Wealth is a means,<br><em>not an end.</em></h2>
-        </div>
-        <div class="split-body">
-          <p class="reveal">
+) + f"""
+{chapter_open("01", "More than money")}          <p class="statement reveal">
             Financial success and financial wellness are not the same thing.
-            Our Living Intently experience invites you to step back and
-            self-assess your total well-being &mdash; family, health, work,
-            purpose, and finances &mdash; and then create meaningful personal
-            and financial life goals from that fuller picture.
+            Wealth is a means, <em>not an end.</em>
           </p>
-          <p class="reveal">
-            The result is a plan with a &ldquo;why&rdquo; behind every
-            number, and an advisor relationship built around the life you
-            want to live &mdash; not just the assets you hold.
-          </p>
+          <div class="prose-cols">
+            <p class="reveal">
+              Our Living Intently experience invites you to step back and
+              self-assess your total well-being &mdash; family, health,
+              work, purpose, and finances &mdash; and then create meaningful
+              personal and financial life goals from that fuller picture.
+            </p>
+            <p class="reveal">
+              The result is a plan with a &ldquo;why&rdquo; behind every
+              number, and an advisor relationship built around the life you
+              want to live &mdash; not just the assets you hold.
+            </p>
+          </div>
+{CHAPTER_CLOSE}
+{chapter_open("02", "What to expect")}          <h2 class="chapter-heading reveal">Four movements,<br><em>one rhythm.</em></h2>
+          <div class="ledger">
+            <div class="ledger-row reveal">
+              <span class="ledger-num">01</span>
+              <span class="ledger-title">Discover</span>
+              <span class="ledger-desc">We listen first &mdash; your story,
+              your values, your goals, and your concerns.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">02</span>
+              <span class="ledger-title">Assess</span>
+              <span class="ledger-desc">Together we take stock of your total
+              well-being and your complete financial picture.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">03</span>
+              <span class="ledger-title">Design</span>
+              <span class="ledger-desc">We build a disciplined, personalized
+              strategy across planning, investments, and protection.</span>
+            </div>
+            <div class="ledger-row reveal">
+              <span class="ledger-num">04</span>
+              <span class="ledger-title">Live</span>
+              <span class="ledger-desc">We meet regularly, adjust as life
+              changes, and keep your plan pointed at what matters.</span>
+            </div>
+          </div>
+{CHAPTER_CLOSE}
+    <section class="coda">
+      <div class="frame coda-grid">
+        <h2 class="reveal">Begin<br><em>living intently.</em></h2>
+        <div class="coda-body reveal">
+          <a class="btn" href="/contact-us/">Schedule a conversation</a>
         </div>
-      </div>
-    </section>
-
-    <section class="section band">
-      <div class="container">
-""" + kicker_header("What to expect", "Four movements, one rhythm") + """
-        <ol class="process-grid">
-          <li class="process reveal" style="--d:0ms">
-            <span class="pillar-num" aria-hidden="true">01</span>
-            <h3>Discover</h3>
-            <p>We listen first &mdash; your story, your values, your goals,
-            and your concerns.</p>
-          </li>
-          <li class="process reveal" style="--d:120ms">
-            <span class="pillar-num" aria-hidden="true">02</span>
-            <h3>Assess</h3>
-            <p>Together we take stock of your total well-being and your
-            complete financial picture.</p>
-          </li>
-          <li class="process reveal" style="--d:240ms">
-            <span class="pillar-num" aria-hidden="true">03</span>
-            <h3>Design</h3>
-            <p>We build a disciplined, personalized strategy across
-            planning, investments, and protection.</p>
-          </li>
-          <li class="process reveal" style="--d:360ms">
-            <span class="pillar-num" aria-hidden="true">04</span>
-            <h3>Live</h3>
-            <p>We meet regularly, adjust as life changes, and keep your plan
-            pointed at what matters.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div class="hero-art" aria-hidden="true"></div>
-      <div class="container reveal">
-        <h2 class="display light">Begin <em>living intently.</em></h2>
-        <a class="btn btn-gold" href="/contact-us/">Schedule a conversation</a>
       </div>
     </section>
 """
 
 BLOG_BODY = page_hero(
     "Insights &amp; intellect",
-    "Our <em>Perspective</em>",
+    "Our<br><em>Perspective.</em>",
     "Commentary on markets, planning, and living intently.",
 ) + f"""
-    <section class="section">
-      <div class="container narrow reveal">
-        <p>
-          Our team regularly shares market commentary, week-in-review notes,
-          and planning insights. New posts will appear here &mdash; in the
-          meantime, follow us on
-          <a href="{LINKS['linkedin']}" rel="noopener" target="_blank">LinkedIn</a>
-          or <a href="{LINKS['facebook']}" rel="noopener" target="_blank">Facebook</a>,
-          or <a href="/contact-us/">contact us</a> to join our distribution
-          list.
-        </p>
-      </div>
-    </section>
-"""
+{chapter_open("01", "Coming soon")}          <p class="reveal">
+            Our team regularly shares market commentary, week-in-review
+            notes, and planning insights. New posts will appear here &mdash;
+            in the meantime, follow us on
+            <a href="{LINKS['linkedin']}" rel="noopener" target="_blank">LinkedIn</a>
+            or <a href="{LINKS['facebook']}" rel="noopener" target="_blank">Facebook</a>,
+            or <a href="/contact-us/">contact us</a> to join our
+            distribution list.
+          </p>
+{CHAPTER_CLOSE}"""
 
 EVENTS_BODY = page_hero(
     "Calls, webinars &amp; gatherings",
-    "Events &amp; <em>Webinars</em>",
+    "Events &amp;<br><em>Webinars.</em>",
     "Market update calls, webinars, and client events.",
 ) + f"""
-    <section class="section">
-      <div class="container narrow reveal">
-        <p>
-          Triada Advisors hosts periodic market update calls and client
-          events. Upcoming events will be listed here. To be notified about
-          the next one, call us at
-          <a href="tel:+16182813444">{PHONE_OFFICE}</a>
-          or <a href="/contact-us/">send us a message</a>.
-        </p>
-      </div>
-    </section>
-"""
+{chapter_open("01", "Upcoming")}          <p class="reveal">
+            Triada Advisors hosts periodic market update calls and client
+            events. Upcoming events will be listed here. To be notified
+            about the next one, call us at
+            <a href="tel:+16182813444">{PHONE_OFFICE}</a>
+            or <a href="/contact-us/">send us a message</a>.
+          </p>
+{CHAPTER_CLOSE}"""
 
 CONTACT_BODY = page_hero(
     "We&rsquo;d be glad to talk",
-    "Contact <em>Us</em>",
+    "Contact<br><em>Us.</em>",
     "About markets, your plan, or what&rsquo;s next.",
 ) + f"""
-    <section class="section">
-      <div class="container contact-grid">
-        <div class="contact-card reveal">
-          <h2>Visit or call</h2>
-          <p class="contact-lines">
-            <strong>Triada Advisors</strong><br>
-            {ADDRESS_LINES[0]}<br>
-            {ADDRESS_LINES[1]}
-          </p>
-          <p class="contact-lines">
-            Office <a href="tel:+16182813444">{PHONE_OFFICE}</a><br>
-            Toll-Free <a href="tel:+18448949822">{PHONE_TOLLFREE}</a><br>
-            <a href="mailto:{EMAIL}">{EMAIL}</a>
-          </p>
-          <p class="social-links">
-            <a href="{LINKS['linkedin']}" rel="noopener" target="_blank">LinkedIn</a>
-            <a href="{LINKS['facebook']}" rel="noopener" target="_blank">Facebook</a>
-          </p>
-        </div>
-        <div class="reveal">
-          <h2>Send a message</h2>
-          <form class="contact-form" action="mailto:{EMAIL}" method="get">
-            <div class="field-row">
+{chapter_open("01", "Visit or call")}          <div class="contact-cols">
+            <div class="reveal">
+              <p class="contact-big">
+                {ADDRESS_LINES[0]}<br>
+                {ADDRESS_LINES[1]}
+              </p>
+              <p class="contact-big">
+                <a href="tel:+16182813444">{PHONE_OFFICE}</a><br>
+                <a href="tel:+18448949822">{PHONE_TOLLFREE}</a><br>
+                <a href="mailto:{EMAIL}">{EMAIL}</a>
+              </p>
+              <p class="social-links">
+                <a href="{LINKS['linkedin']}" rel="noopener" target="_blank">LinkedIn</a>
+                <a href="{LINKS['facebook']}" rel="noopener" target="_blank">Facebook</a>
+              </p>
+            </div>
+            <form class="contact-form reveal" action="mailto:{EMAIL}" method="get">
               <div class="field">
                 <label for="cf-name">Name</label>
                 <input id="cf-name" name="name" type="text" autocomplete="name" required>
               </div>
               <div class="field">
+                <label for="cf-email">Email</label>
+                <input id="cf-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
                 <label for="cf-phone">Phone <span class="optional">(optional)</span></label>
                 <input id="cf-phone" name="phone" type="tel" autocomplete="tel">
               </div>
-            </div>
-            <div class="field">
-              <label for="cf-email">Email</label>
-              <input id="cf-email" name="email" type="email" autocomplete="email" required>
-            </div>
-            <div class="field">
-              <label for="cf-message">How can we help?</label>
-              <textarea id="cf-message" name="body" rows="5" required></textarea>
-            </div>
-            <button class="btn btn-gold" type="submit">Send message</button>
-            <p class="form-note">Please do not include account numbers or
-            other sensitive personal information in this form.</p>
-          </form>
-        </div>
-      </div>
-    </section>
-"""
+              <div class="field">
+                <label for="cf-message">How can we help?</label>
+                <textarea id="cf-message" name="body" rows="4" required></textarea>
+              </div>
+              <button class="btn" type="submit">Send message</button>
+              <p class="form-note">Please do not include account numbers or
+              other sensitive personal information in this form.</p>
+            </form>
+          </div>
+{CHAPTER_CLOSE}"""
 
 
 def redirect_page(target):

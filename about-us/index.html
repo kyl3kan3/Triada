@@ -15,6 +15,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="progress" aria-hidden="true"><i></i></div>
 
   <div class="topline">
     <div class="frame topline-inner">
@@ -55,6 +56,8 @@
 
   <main id="main">
     <section class="page-plate">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="drift" style="top:18%; right:10%; width:44px; --t:9s;" aria-hidden="true"><svg viewBox="0 0 44 40"><path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg></div>
       <div class="frame">
         <p class="eyebrow reveal">More than 20 years of stewardship</p>
         <h1 class="reveal">About<br><em>Us.</em></h1>
@@ -169,6 +172,10 @@
 
   </main>
 
+    <div class="marquee reverse" aria-hidden="true">
+      <div class="marquee-track"><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b><span>Plan wisely</span><b>&#10022;</b><span>Invest intently</span><b>&#10022;</b><span>Live fully</span><b>&#10022;</b></div>
+    </div>
+
   <footer class="colophon">
     <div class="frame colophon-grid">
       <div class="colophon-brand">
@@ -269,8 +276,13 @@
       });
 
       var header = document.getElementById('site-header');
+      var bar = document.querySelector('.progress i');
       var onScroll = function () {
         header.classList.toggle('is-scrolled', window.scrollY > 8);
+        if (bar) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.setProperty('--p', max > 0 ? (window.scrollY / max) : 0);
+        }
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
@@ -317,6 +329,106 @@
         counters.forEach(function (el) {
           el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
         });
+      }
+
+      /* 3D tilt on plates */
+      if (!reduced && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.plate').forEach(function (el) {
+          el.addEventListener('pointermove', function (e) {
+            var r = el.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            el.style.transform = 'perspective(800px) rotateY(' + (x * 10).toFixed(2) +
+              'deg) rotateX(' + (-y * 10).toFixed(2) + 'deg) translateY(-4px)';
+          });
+          el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+        });
+      }
+
+      /* Cursor glow + parallax in hero */
+      var glow = document.querySelector('.glow');
+      if (glow && !reduced) {
+        glow.parentElement.addEventListener('pointermove', function (e) {
+          var r = glow.getBoundingClientRect();
+          glow.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+          glow.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        }, { passive: true });
+      }
+      if (!reduced) {
+        var plx = document.querySelectorAll('[data-plx]');
+        if (plx.length) {
+          window.addEventListener('scroll', function () {
+            var y = window.scrollY;
+            plx.forEach(function (el) {
+              el.style.transform = 'translate3d(0,' + (y * parseFloat(el.getAttribute('data-plx'))).toFixed(1) + 'px,0)';
+            });
+          }, { passive: true });
+        }
+      }
+
+      /* 3D wireframe triad — rotating tetrahedra on canvas */
+      var cv = document.getElementById('triad3d');
+      if (cv && !reduced && cv.getContext) {
+        cv.parentElement.classList.add('has-3d');
+        var ctx = cv.getContext('2d');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var size = function () {
+          var r = cv.getBoundingClientRect();
+          cv.width = r.width * dpr; cv.height = r.height * dpr;
+        };
+        size();
+        window.addEventListener('resize', size);
+
+        var V = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+        var E = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+        var mx = 0, my = 0;
+        window.addEventListener('pointermove', function (e) {
+          mx = e.clientX / window.innerWidth - 0.5;
+          my = e.clientY / window.innerHeight - 0.5;
+        }, { passive: true });
+
+        var project = function (v, ax, ay, scale, w, h) {
+          var ca = Math.cos(ax), sa = Math.sin(ax);
+          var cb = Math.cos(ay), sb = Math.sin(ay);
+          var x1 = v[0] * cb + v[2] * sb, z1 = -v[0] * sb + v[2] * cb;
+          var y1 = v[1] * ca - z1 * sa, z2 = v[1] * sa + z1 * ca;
+          var f = 3 / (3 + z2);
+          return [w / 2 + x1 * f * scale, h / 2 + y1 * f * scale, z2];
+        };
+
+        var t = 0;
+        var draw = function () {
+          requestAnimationFrame(draw);
+          t += 0.0045;
+          var w = cv.width, h = cv.height;
+          var s = Math.min(w, h) / 3.1;
+          ctx.clearRect(0, 0, w, h);
+          [
+            { scale: 1,    ax: t * 0.7 + my,       ay: t + mx * 1.6,        alpha: 1 },
+            { scale: 0.55, ax: -t * 0.9 - my * .6, ay: -t * 1.3 - mx,       alpha: 0.55 },
+            { scale: 0.28, ax: t * 1.4 + my * .3,  ay: t * 1.8 + mx * .5,   alpha: 0.35 }
+          ].forEach(function (o) {
+            var P = V.map(function (v) { return project(v, o.ax, o.ay, s * o.scale, w, h); });
+            E.forEach(function (e) {
+              var a = P[e[0]], b = P[e[1]];
+              var depth = 1 - ((a[2] + b[2]) / 2 + 1.8) / 3.6;
+              ctx.beginPath();
+              ctx.moveTo(a[0], a[1]);
+              ctx.lineTo(b[0], b[1]);
+              ctx.strokeStyle = 'rgba(212,175,90,' + (o.alpha * (0.25 + depth * 0.75)).toFixed(3) + ')';
+              ctx.lineWidth = dpr * (0.6 + depth * 1.1);
+              ctx.stroke();
+            });
+            P.forEach(function (p) {
+              var depth = 1 - (p[2] + 1.8) / 3.6;
+              ctx.beginPath();
+              ctx.arc(p[0], p[1], dpr * (1.2 + depth * 2.2), 0, 6.2832);
+              ctx.fillStyle = 'rgba(242,215,141,' + (o.alpha * (0.3 + depth * 0.7)).toFixed(3) + ')';
+              ctx.fill();
+            });
+          });
+        };
+        draw();
       }
     })();
   </script>

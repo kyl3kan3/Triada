@@ -73,6 +73,22 @@ HERO_LINEART = """<svg class="hero-lines" viewBox="0 0 400 360" aria-hidden="tru
   <path d="M200 296 L226 350 H174 Z" fill="currentColor" opacity=".5"/>
 </svg>"""
 
+DRIFT_TRIANGLE = """<svg viewBox="0 0 44 40"><path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>"""
+
+_MARQUEE_SEQ = (
+    "<span>Plan wisely</span><b>&#10022;</b>"
+    "<span>Invest intently</span><b>&#10022;</b>"
+    "<span>Live fully</span><b>&#10022;</b>"
+) * 3
+# Track is two identical halves; the animation translates -50% for a seamless loop.
+MARQUEE = f"""    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">{_MARQUEE_SEQ}{_MARQUEE_SEQ}</div>
+    </div>
+"""
+MARQUEE_REVERSE = MARQUEE.replace('class="marquee"', 'class="marquee reverse"')
+
+AURORA = '<div class="aurora" aria-hidden="true"></div>'
+
 FAVICON = (
     "data:image/svg+xml,"
     "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 40'%3E"
@@ -171,6 +187,7 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
 {jsonld}</head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="progress" aria-hidden="true"><i></i></div>
 
   <div class="topline">
     <div class="frame topline-inner">
@@ -202,6 +219,7 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
 {body}
   </main>
 
+{MARQUEE_REVERSE}
   <footer class="colophon">
     <div class="frame colophon-grid">
       <div class="colophon-brand">
@@ -265,8 +283,13 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
       }});
 
       var header = document.getElementById('site-header');
+      var bar = document.querySelector('.progress i');
       var onScroll = function () {{
         header.classList.toggle('is-scrolled', window.scrollY > 8);
+        if (bar) {{
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.setProperty('--p', max > 0 ? (window.scrollY / max) : 0);
+        }}
       }};
       window.addEventListener('scroll', onScroll, {{ passive: true }});
       onScroll();
@@ -314,6 +337,106 @@ def page_shell(*, title, description, active_path, body, canonical="", home=Fals
           el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
         }});
       }}
+
+      /* 3D tilt on plates */
+      if (!reduced && window.matchMedia('(hover: hover)').matches) {{
+        document.querySelectorAll('.plate').forEach(function (el) {{
+          el.addEventListener('pointermove', function (e) {{
+            var r = el.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            el.style.transform = 'perspective(800px) rotateY(' + (x * 10).toFixed(2) +
+              'deg) rotateX(' + (-y * 10).toFixed(2) + 'deg) translateY(-4px)';
+          }});
+          el.addEventListener('pointerleave', function () {{ el.style.transform = ''; }});
+        }});
+      }}
+
+      /* Cursor glow + parallax in hero */
+      var glow = document.querySelector('.glow');
+      if (glow && !reduced) {{
+        glow.parentElement.addEventListener('pointermove', function (e) {{
+          var r = glow.getBoundingClientRect();
+          glow.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+          glow.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        }}, {{ passive: true }});
+      }}
+      if (!reduced) {{
+        var plx = document.querySelectorAll('[data-plx]');
+        if (plx.length) {{
+          window.addEventListener('scroll', function () {{
+            var y = window.scrollY;
+            plx.forEach(function (el) {{
+              el.style.transform = 'translate3d(0,' + (y * parseFloat(el.getAttribute('data-plx'))).toFixed(1) + 'px,0)';
+            }});
+          }}, {{ passive: true }});
+        }}
+      }}
+
+      /* 3D wireframe triad — rotating tetrahedra on canvas */
+      var cv = document.getElementById('triad3d');
+      if (cv && !reduced && cv.getContext) {{
+        cv.parentElement.classList.add('has-3d');
+        var ctx = cv.getContext('2d');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var size = function () {{
+          var r = cv.getBoundingClientRect();
+          cv.width = r.width * dpr; cv.height = r.height * dpr;
+        }};
+        size();
+        window.addEventListener('resize', size);
+
+        var V = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+        var E = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+        var mx = 0, my = 0;
+        window.addEventListener('pointermove', function (e) {{
+          mx = e.clientX / window.innerWidth - 0.5;
+          my = e.clientY / window.innerHeight - 0.5;
+        }}, {{ passive: true }});
+
+        var project = function (v, ax, ay, scale, w, h) {{
+          var ca = Math.cos(ax), sa = Math.sin(ax);
+          var cb = Math.cos(ay), sb = Math.sin(ay);
+          var x1 = v[0] * cb + v[2] * sb, z1 = -v[0] * sb + v[2] * cb;
+          var y1 = v[1] * ca - z1 * sa, z2 = v[1] * sa + z1 * ca;
+          var f = 3 / (3 + z2);
+          return [w / 2 + x1 * f * scale, h / 2 + y1 * f * scale, z2];
+        }};
+
+        var t = 0;
+        var draw = function () {{
+          requestAnimationFrame(draw);
+          t += 0.0045;
+          var w = cv.width, h = cv.height;
+          var s = Math.min(w, h) / 3.1;
+          ctx.clearRect(0, 0, w, h);
+          [
+            {{ scale: 1,    ax: t * 0.7 + my,       ay: t + mx * 1.6,        alpha: 1 }},
+            {{ scale: 0.55, ax: -t * 0.9 - my * .6, ay: -t * 1.3 - mx,       alpha: 0.55 }},
+            {{ scale: 0.28, ax: t * 1.4 + my * .3,  ay: t * 1.8 + mx * .5,   alpha: 0.35 }}
+          ].forEach(function (o) {{
+            var P = V.map(function (v) {{ return project(v, o.ax, o.ay, s * o.scale, w, h); }});
+            E.forEach(function (e) {{
+              var a = P[e[0]], b = P[e[1]];
+              var depth = 1 - ((a[2] + b[2]) / 2 + 1.8) / 3.6;
+              ctx.beginPath();
+              ctx.moveTo(a[0], a[1]);
+              ctx.lineTo(b[0], b[1]);
+              ctx.strokeStyle = 'rgba(212,175,90,' + (o.alpha * (0.25 + depth * 0.75)).toFixed(3) + ')';
+              ctx.lineWidth = dpr * (0.6 + depth * 1.1);
+              ctx.stroke();
+            }});
+            P.forEach(function (p) {{
+              var depth = 1 - (p[2] + 1.8) / 3.6;
+              ctx.beginPath();
+              ctx.arc(p[0], p[1], dpr * (1.2 + depth * 2.2), 0, 6.2832);
+              ctx.fillStyle = 'rgba(242,215,141,' + (o.alpha * (0.3 + depth * 0.7)).toFixed(3) + ')';
+              ctx.fill();
+            }});
+          }});
+        }};
+        draw();
+      }}
     }})();
   </script>
 </body>
@@ -347,6 +470,8 @@ def arrow_link(href, label):
 def page_hero(eyebrow, heading, lede=""):
     lede_html = f'\n        <p class="hero-lede reveal">{lede}</p>' if lede else ""
     return f"""    <section class="page-plate">
+      {AURORA}
+      <div class="drift" style="top:18%; right:10%; width:44px; --t:9s;" aria-hidden="true">{DRIFT_TRIANGLE}</div>
       <div class="frame">
         <p class="eyebrow reveal">{eyebrow}</p>
         <h1 class="reveal">{heading}</h1>{lede_html}
@@ -581,31 +706,46 @@ def team_member_body(m):
 # ---------------------------------------------------------------------------
 
 HOME_BODY = f"""    <section class="hero">
+      {AURORA}
+      <div class="glow" aria-hidden="true"></div>
+      <div class="drift" style="top:12%; left:6%; width:52px; --t:8s;" data-plx="0.12" aria-hidden="true">{DRIFT_TRIANGLE}</div>
+      <div class="drift" style="top:64%; left:44%; width:30px; --t:11s; opacity:.2;" data-plx="0.2" aria-hidden="true">{DRIFT_TRIANGLE}</div>
+      <div class="drift" style="top:20%; right:8%; width:38px; --t:9.5s; opacity:.25;" data-plx="0.16" aria-hidden="true">{DRIFT_TRIANGLE}</div>
       <div class="frame hero-grid">
         <div class="hero-copy">
           <p class="eyebrow reveal is-visible">Columbia, Illinois &middot; Serving clients nationwide</p>
-          <h1 class="reveal is-visible">Feel confident<br>in your<br><em>financial future.</em></h1>
-          <p class="hero-lede reveal is-visible">
+          <h1>
+            <span class="w" style="--wd:60ms">Feel</span>
+            <span class="w" style="--wd:140ms">confident</span><br>
+            <span class="w" style="--wd:220ms">in</span>
+            <span class="w" style="--wd:280ms">your</span><br>
+            <span class="w" style="--wd:380ms"><em>financial</em></span>
+            <span class="w" style="--wd:480ms"><em>future.</em></span>
+          </h1>
+          <p class="hero-lede reveal is-visible" style="--d:600ms">
             For more than two decades, Triada Advisors has helped family
             business owners, retirees, and wealth builders pursue their
             long-term goals through disciplined financial planning,
             investment management, and insurance consulting.
           </p>
-          <div class="link-row reveal is-visible">
+          <div class="link-row reveal is-visible" style="--d:780ms">
             <a class="btn" href="/contact-us/">Start the conversation</a>
             {arrow_link('/your-experience/', 'Discover your experience')}
           </div>
         </div>
-        <div class="hero-figure reveal is-visible" aria-hidden="true">
+        <div class="hero-figure" aria-hidden="true">
           {HERO_LINEART}
+          <canvas id="triad3d" class="hero-3d"></canvas>
         </div>
       </div>
       <div class="frame hero-foot" aria-hidden="true">
         <span>Est. two decades of stewardship</span>
         <span>Financial planning &middot; Investments &middot; Insurance</span>
-        <span>Scroll</span>
+        <span class="hero-scroll">Scroll <i></i></span>
       </div>
     </section>
+
+{MARQUEE}
 
 {chapter_open("01", "Our philosophy")}          <p class="statement reveal">
             Earning your trust and caring about your best interests come
@@ -691,6 +831,7 @@ HOME_BODY = f"""    <section class="hero">
           </div>
 {CHAPTER_CLOSE}
     <section class="epigraph">
+      <div class="aurora" aria-hidden="true"></div>
       <div class="frame reveal">
         {MARK_SVG}
         <blockquote>
@@ -702,6 +843,7 @@ HOME_BODY = f"""    <section class="hero">
     </section>
 
     <section class="coda">
+      <div class="aurora" aria-hidden="true"></div>
       <div class="frame coda-grid">
         <h2 class="reveal">Ready to take<br><em>the next step?</em></h2>
         <div class="coda-body reveal">
@@ -835,6 +977,7 @@ SOLUTIONS_BODY = page_hero(
           </p>
 {CHAPTER_CLOSE}
     <section class="coda">
+      <div class="aurora" aria-hidden="true"></div>
       <div class="frame coda-grid">
         <h2 class="reveal">Not sure<br><em>where to start?</em></h2>
         <div class="coda-body reveal">
@@ -898,6 +1041,7 @@ EXPERIENCE_BODY = page_hero(
           </div>
 {CHAPTER_CLOSE}
     <section class="coda">
+      <div class="aurora" aria-hidden="true"></div>
       <div class="frame coda-grid">
         <h2 class="reveal">Begin<br><em>living intently.</em></h2>
         <div class="coda-body reveal">

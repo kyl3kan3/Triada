@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Our Solutions | Triada Advisors</title>
   <meta name="description" content="Financial planning, investment management, insurance consulting and tax coordination from Triada Advisors in Columbia, Illinois.">
+  <link rel="canonical" href="https://www.triadaadvisors.com/our-solutions/">
+  <meta property="og:site_name" content="Triada Advisors">
+  <meta property="og:title" content="Our Solutions | Triada Advisors">
+  <meta property="og:description" content="Financial planning, investment management, insurance consulting and tax coordination from Triada Advisors in Columbia, Illinois.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 40'%3E%3Cpath d='M22 3 L41 37 H3 Z' fill='none' stroke='%23c2a25c' stroke-width='2.4'/%3E%3Cpath d='M22 13.5 L31.5 30.5 H12.5 Z' fill='%23c2a25c' opacity='.35'/%3E%3Cpath d='M22 21 L26.8 30.5 H17.2 Z' fill='%23c2a25c'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
@@ -12,23 +18,28 @@
 
   <div class="topbar">
     <div class="container topbar-inner">
-      <span>1000 Eleven South, Suite 3D, Columbia, IL 62236</span>
-      <span>
-        <a href="tel:+16182813444">Office: (618) 281-3444</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="tel:+18448949822">Toll-Free: (844) 894-9822</a>
+      <span class="topbar-address">1000 Eleven South, Suite 3D, Columbia, IL 62236</span>
+      <span class="topbar-phones">
+        <a href="tel:+16182813444">Office (618) 281-3444</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="tel:+18448949822">Toll-Free (844) 894-9822</a>
       </span>
     </div>
   </div>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/">
-        <span class="brand-mark" aria-hidden="true">&#9651;</span>
-        <span class="brand-text">Triada <em>Advisors</em></span>
+      <a class="brand" href="/" aria-label="Triada Advisors home">
+        <svg class="mark" viewBox="0 0 44 40" aria-hidden="true" focusable="false">
+  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="currentColor" opacity=".28"/>
+  <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor"/>
+</svg>
+        <span class="brand-text">Triada<em>Advisors</em></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Menu</span>&#9776;
+        <span class="sr-only">Menu</span>
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main navigation">
         <ul>
@@ -47,70 +58,122 @@
 
   <main id="main">
     <section class="page-hero">
+      <div class="hero-art" aria-hidden="true"></div>
       <div class="container">
-        <h1>Our Solutions</h1>
-        <p class="lede">Expertise and guidance to help turn your life&rsquo;s goals into reality.</p>
+        <p class="kicker reveal"><span class="kicker-rule" aria-hidden="true"></span>Comprehensive by design</p>
+        <h1 class="reveal">Our <em>Solutions</em></h1>
+        <p class="lede reveal">Expertise and guidance to help turn your life&rsquo;s goals into reality.</p>
       </div>
     </section>
 
-    <section class="container section">
-      <article class="solution">
-        <h2>Financial Planning</h2>
-        <p>
-          A strong, sound financial plan encompasses many different aspects
-          of your financial future &mdash; cash flow, retirement, taxes,
-          education, estate considerations, and the goals that are uniquely
-          yours. We build plans that connect those pieces into one clear
-          picture, then revisit them as your life evolves.
-        </p>
-      </article>
-      <article class="solution">
-        <h2>Investment Management</h2>
-        <p>
-          Rather than relying on a single solution or a model portfolio, we
-          customize each strategy based on your needs &mdash; and your needs
-          alone. Portfolios are managed with discipline and supported by the
-          Cornerstone Wealth Portfolios investment team, giving you
-          institutional-caliber research with personal accountability.
-        </p>
-      </article>
-      <article class="solution">
-        <h2>Insurance Consulting</h2>
-        <p>
-          With deep experience in the insurance marketplace and knowledge of
-          the universe of options available, our advisors help you address
-          insurance needs and assess appropriate coverage &mdash; protecting
-          your income, your family, and your plan against the unexpected.
-        </p>
-      </article>
-      <article class="solution">
-        <h2>Tax Coordination</h2>
-        <p>
-          Through Triada Tax Services LLC and the CPA credentials on our
-          team, we help clients keep their tax picture and financial plan
-          working together instead of at cross purposes.
-        </p>
-      </article>
+    <section class="section">
+      <div class="container solutions-list">
+        <article class="solution reveal">
+          <span class="solution-num" aria-hidden="true">01</span>
+          <div class="solution-icon"><svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+  <circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M31 17 L26.5 26.5 L17 31 L21.5 21.5 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="24" cy="24" r="1.6" fill="currentColor"/>
+  <path d="M24 3.5 V7 M24 41 V44.5 M3.5 24 H7 M41 24 H44.5" stroke="currentColor" stroke-width="1.5"/>
+</svg></div>
+          <div>
+            <h2>Financial Planning</h2>
+            <p>
+              A strong, sound financial plan encompasses many different
+              aspects of your financial future &mdash; cash flow, retirement,
+              taxes, education, estate considerations, and the goals that are
+              uniquely yours. We build plans that connect those pieces into
+              one clear picture, then revisit them as your life evolves.
+            </p>
+          </div>
+        </article>
+        <article class="solution reveal">
+          <span class="solution-num" aria-hidden="true">02</span>
+          <div class="solution-icon"><svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+  <path d="M6 40 H42" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 33 L18 23 L25 29 L40 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M32.5 11 H41 V19.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="18" cy="23" r="1.8" fill="currentColor"/>
+  <circle cx="25" cy="29" r="1.8" fill="currentColor"/>
+</svg></div>
+          <div>
+            <h2>Investment Management</h2>
+            <p>
+              Rather than relying on a single solution or a model portfolio,
+              we customize each strategy based on your needs &mdash; and your
+              needs alone. Portfolios are managed with discipline and
+              supported by the Cornerstone Wealth Portfolios investment team,
+              giving you institutional-caliber research with personal
+              accountability.
+            </p>
+          </div>
+        </article>
+        <article class="solution reveal">
+          <span class="solution-num" aria-hidden="true">03</span>
+          <div class="solution-icon"><svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+  <path d="M24 5 L40 11 V23 C40 33.5 33.5 40.5 24 44 C14.5 40.5 8 33.5 8 23 V11 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M17 24 L22 29 L31.5 18.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+          <div>
+            <h2>Insurance Consulting</h2>
+            <p>
+              With deep experience in the insurance marketplace and knowledge
+              of the universe of options available, our advisors help you
+              address insurance needs and assess appropriate coverage &mdash;
+              protecting your income, your family, and your plan against the
+              unexpected.
+            </p>
+          </div>
+        </article>
+        <article class="solution reveal">
+          <span class="solution-num" aria-hidden="true">04</span>
+          <div class="solution-icon"><svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+  <rect x="10" y="6" width="28" height="36" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M17 15 H31 M17 22 H31 M17 29 H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M28.5 33.5 L37 25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="29.5" cy="26" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="36" cy="32.5" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+</svg></div>
+          <div>
+            <h2>Tax Coordination</h2>
+            <p>
+              Through Triada Tax Services LLC and the CPA credentials on our
+              team, we help clients keep their tax picture and financial plan
+              working together instead of at cross purposes.
+            </p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="cta-band">
-      <div class="container">
-        <h2>Not sure where to start?</h2>
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="container reveal">
+        <h2 class="display light">Not sure <em>where to start?</em></h2>
         <p>Every engagement begins with a conversation about you.</p>
-        <p><a class="btn" href="/contact-us/">Talk with an advisor</a></p>
+        <a class="btn btn-gold" href="/contact-us/">Talk with an advisor</a>
       </div>
     </section>
 
   </main>
 
   <footer class="site-footer">
+    <div class="footer-rule" aria-hidden="true"></div>
     <div class="container footer-grid">
-      <div>
-        <h2 class="footer-brand">Triada <em>Advisors</em></h2>
+      <div class="footer-brand-col">
+        <a class="brand brand-footer" href="/">
+          <svg class="mark" viewBox="0 0 44 40" aria-hidden="true" focusable="false">
+  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="currentColor" opacity=".28"/>
+  <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor"/>
+</svg>
+          <span class="brand-text">Triada<em>Advisors</em></span>
+        </a>
+        <p class="footer-tagline">Plan wisely. Invest intently. Live fully.</p>
         <p>1000 Eleven South, Suite 3D<br>Columbia, IL 62236</p>
         <p>
-          Office: <a href="tel:+16182813444">(618) 281-3444</a><br>
-          Toll-Free: <a href="tel:+18448949822">(844) 894-9822</a><br>
+          Office <a href="tel:+16182813444">(618) 281-3444</a><br>
+          Toll-Free <a href="tel:+18448949822">(844) 894-9822</a><br>
           <a href="mailto:triada@lpl.com">triada@lpl.com</a>
         </p>
         <p class="social-links">
@@ -118,8 +181,8 @@
           <a href="https://www.facebook.com/TriadaAdvisors/" rel="noopener" target="_blank">Facebook</a>
         </p>
       </div>
-      <div>
-        <h2>Quick Links</h2>
+      <nav aria-label="Footer">
+        <h2>Explore</h2>
         <ul class="footer-links">
           <li><a href="/about-us/">About Us</a></li>
           <li><a href="/our-solutions/">Our Solutions</a></li>
@@ -129,8 +192,8 @@
           <li><a href="/events/">Events</a></li>
           <li><a href="/contact-us/">Contact</a></li>
         </ul>
-      </div>
-      <div>
+      </nav>
+      <nav aria-label="Resources">
         <h2>Resources</h2>
         <ul class="footer-links">
           <li><a href="https://brokercheck.finra.org/" rel="noopener" target="_blank">FINRA BrokerCheck</a></li>
@@ -140,7 +203,7 @@
           <li><a href="https://www.finra.org/" rel="noopener" target="_blank">FINRA</a></li>
           <li><a href="https://www.sipc.org/" rel="noopener" target="_blank">SIPC</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="container">
 
@@ -187,8 +250,60 @@
       var nav = document.getElementById('site-nav');
       btn.addEventListener('click', function () {
         var open = nav.classList.toggle('open');
+        btn.classList.toggle('is-open', open);
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+
+      var header = document.getElementById('site-header');
+      var onScroll = function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 8);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var revealables = document.querySelectorAll('.reveal');
+      if (!reduced && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealables.forEach(function (el) { io.observe(el); });
+      } else {
+        revealables.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      var counters = document.querySelectorAll('[data-count]');
+      var animate = function (el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        var start = null;
+        var dur = 1400;
+        var step = function (ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      if (!reduced && 'IntersectionObserver' in window) {
+        var cio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { animate(e.target); cio.unobserve(e.target); }
+          });
+        }, { threshold: 0.5 });
+        counters.forEach(function (el) { cio.observe(el); });
+      } else {
+        counters.forEach(function (el) {
+          el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+        });
+      }
     })();
   </script>
 </body>

@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Our Team | Triada Advisors</title>
   <meta name="description" content="Meet the Triada Advisors team — advisors, tax and client service professionals, and the Cornerstone Wealth Management investment team.">
+  <link rel="canonical" href="https://www.triadaadvisors.com/team/">
+  <meta property="og:site_name" content="Triada Advisors">
+  <meta property="og:title" content="Our Team | Triada Advisors">
+  <meta property="og:description" content="Meet the Triada Advisors team — advisors, tax and client service professionals, and the Cornerstone Wealth Management investment team.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 40'%3E%3Cpath d='M22 3 L41 37 H3 Z' fill='none' stroke='%23c2a25c' stroke-width='2.4'/%3E%3Cpath d='M22 13.5 L31.5 30.5 H12.5 Z' fill='%23c2a25c' opacity='.35'/%3E%3Cpath d='M22 21 L26.8 30.5 H17.2 Z' fill='%23c2a25c'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
@@ -12,23 +18,28 @@
 
   <div class="topbar">
     <div class="container topbar-inner">
-      <span>1000 Eleven South, Suite 3D, Columbia, IL 62236</span>
-      <span>
-        <a href="tel:+16182813444">Office: (618) 281-3444</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="tel:+18448949822">Toll-Free: (844) 894-9822</a>
+      <span class="topbar-address">1000 Eleven South, Suite 3D, Columbia, IL 62236</span>
+      <span class="topbar-phones">
+        <a href="tel:+16182813444">Office (618) 281-3444</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="tel:+18448949822">Toll-Free (844) 894-9822</a>
       </span>
     </div>
   </div>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/">
-        <span class="brand-mark" aria-hidden="true">&#9651;</span>
-        <span class="brand-text">Triada <em>Advisors</em></span>
+      <a class="brand" href="/" aria-label="Triada Advisors home">
+        <svg class="mark" viewBox="0 0 44 40" aria-hidden="true" focusable="false">
+  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="currentColor" opacity=".28"/>
+  <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor"/>
+</svg>
+        <span class="brand-text">Triada<em>Advisors</em></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Menu</span>&#9776;
+        <span class="sr-only">Menu</span>
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main navigation">
         <ul>
@@ -47,103 +58,146 @@
 
   <main id="main">
     <section class="page-hero">
+      <div class="hero-art" aria-hidden="true"></div>
       <div class="container">
-        <h1>Our Team</h1>
-        <p class="lede">A teamwork approach adds broader perspective &mdash; and greater benefit &mdash; to every client relationship.</p>
+        <p class="kicker reveal"><span class="kicker-rule" aria-hidden="true"></span>The people behind the plan</p>
+        <h1 class="reveal">Our Team</h1>
+        <p class="lede reveal">A teamwork approach adds broader perspective &mdash; and greater benefit &mdash; to every client relationship.</p>
       </div>
     </section>
 
-      <section class="container section">
-        <h2>Advisors</h2>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Your advisory team</p>
+          <h2>Advisors</h2>
+        </div>
         <div class="team-grid">
-          <a class="team-card" href="/team/calvin-neeman/">
-            <span class="team-avatar" aria-hidden="true">CN</span>
+          <a class="team-card reveal" style="--d:0ms" href="/team/calvin-neeman/">
+            <span class="portrait" aria-hidden="true"><span>CN</span></span>
             <span class="team-name">Calvin Neeman</span>
             <span class="team-title">Financial Advisor</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/aaron-thompson/">
-            <span class="team-avatar" aria-hidden="true">AT</span>
+          <a class="team-card reveal" style="--d:80ms" href="/team/aaron-thompson/">
+            <span class="portrait" aria-hidden="true"><span>AT</span></span>
             <span class="team-name">Aaron Thompson, CPA</span>
             <span class="team-title">Financial Advisor</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/trevor-davis/">
-            <span class="team-avatar" aria-hidden="true">TD</span>
+          <a class="team-card reveal" style="--d:160ms" href="/team/trevor-davis/">
+            <span class="portrait" aria-hidden="true"><span>TD</span></span>
             <span class="team-name">Trevor Davis, CFP&reg;</span>
             <span class="team-title">Financial Advisor</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
         </div>
-      </section>
-      <section class="container section">
-        <h2>Tax Services</h2>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Tax coordination</p>
+          <h2>Tax Services</h2>
+        </div>
         <div class="team-grid">
-          <a class="team-card" href="/team/lee-eggemeyer/">
-            <span class="team-avatar" aria-hidden="true">LE</span>
+          <a class="team-card reveal" style="--d:0ms" href="/team/lee-eggemeyer/">
+            <span class="portrait" aria-hidden="true"><span>LE</span></span>
             <span class="team-name">Lee Eggemeyer, CPA</span>
             <span class="team-title">Triada Tax Services LLC</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
         </div>
-      </section>
-      <section class="container section">
-        <h2>Client Services</h2>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Client experience</p>
+          <h2>Client Services</h2>
+        </div>
         <div class="team-grid">
-          <a class="team-card" href="/team/karleigh-floarke/">
-            <span class="team-avatar" aria-hidden="true">KF</span>
+          <a class="team-card reveal" style="--d:0ms" href="/team/karleigh-floarke/">
+            <span class="portrait" aria-hidden="true"><span>KF</span></span>
             <span class="team-name">Karleigh Floarke, FPQP&reg;</span>
             <span class="team-title">Client Services</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/charlene-ahne/">
-            <span class="team-avatar" aria-hidden="true">CA</span>
+          <a class="team-card reveal" style="--d:80ms" href="/team/charlene-ahne/">
+            <span class="portrait" aria-hidden="true"><span>CA</span></span>
             <span class="team-name">Charlene Ahne</span>
             <span class="team-title">Client Services</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/kristina-davis/">
-            <span class="team-avatar" aria-hidden="true">KD</span>
+          <a class="team-card reveal" style="--d:160ms" href="/team/kristina-davis/">
+            <span class="portrait" aria-hidden="true"><span>KD</span></span>
             <span class="team-name">Kristina Davis</span>
             <span class="team-title">Client Services</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
         </div>
-      </section>
-      <section class="container section">
-        <h2>Cornerstone Wealth Management</h2>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker"><span class="kicker-rule" aria-hidden="true"></span>Investment &amp; research partners</p>
+          <h2>Cornerstone Wealth Management</h2>
+        </div>
         <div class="team-grid">
-          <a class="team-card" href="/team/gregory-shoemaker/">
-            <span class="team-avatar" aria-hidden="true">GS</span>
+          <a class="team-card reveal" style="--d:0ms" href="/team/gregory-shoemaker/">
+            <span class="portrait" aria-hidden="true"><span>GS</span></span>
             <span class="team-name">Gregory Shoemaker</span>
             <span class="team-title">Founder, Cornerstone Wealth Management</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/liyin-bao/">
-            <span class="team-avatar" aria-hidden="true">LB</span>
+          <a class="team-card reveal" style="--d:80ms" href="/team/liyin-bao/">
+            <span class="portrait" aria-hidden="true"><span>LB</span></span>
             <span class="team-name">Liyin Bao, CFA</span>
             <span class="team-title">Investment Team Lead, Cornerstone Wealth Portfolios</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/khurram-naveed/">
-            <span class="team-avatar" aria-hidden="true">KN</span>
+          <a class="team-card reveal" style="--d:160ms" href="/team/khurram-naveed/">
+            <span class="portrait" aria-hidden="true"><span>KN</span></span>
             <span class="team-name">Khurram Naveed, CFA</span>
             <span class="team-title">Investment Team, Cornerstone Wealth Management</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/elizabeth-yaekel/">
-            <span class="team-avatar" aria-hidden="true">EY</span>
+          <a class="team-card reveal" style="--d:240ms" href="/team/elizabeth-yaekel/">
+            <span class="portrait" aria-hidden="true"><span>EY</span></span>
             <span class="team-name">Elizabeth Yaekel</span>
             <span class="team-title">Cornerstone Wealth Management</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
-          <a class="team-card" href="/team/sophia-mcwilliams/">
-            <span class="team-avatar" aria-hidden="true">SM</span>
+          <a class="team-card reveal" style="--d:320ms" href="/team/sophia-mcwilliams/">
+            <span class="portrait" aria-hidden="true"><span>SM</span></span>
             <span class="team-name">Sophia McWilliams</span>
             <span class="team-title">Cornerstone Wealth Management</span>
+            <span class="team-more">View profile <span aria-hidden="true">&rarr;</span></span>
           </a>
         </div>
-      </section>
+      </div>
+    </section>
 
   </main>
 
   <footer class="site-footer">
+    <div class="footer-rule" aria-hidden="true"></div>
     <div class="container footer-grid">
-      <div>
-        <h2 class="footer-brand">Triada <em>Advisors</em></h2>
+      <div class="footer-brand-col">
+        <a class="brand brand-footer" href="/">
+          <svg class="mark" viewBox="0 0 44 40" aria-hidden="true" focusable="false">
+  <path d="M22 3 L41 37 H3 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M22 13.5 L31.5 30.5 H12.5 Z" fill="currentColor" opacity=".28"/>
+  <path d="M22 21 L26.8 30.5 H17.2 Z" fill="currentColor"/>
+</svg>
+          <span class="brand-text">Triada<em>Advisors</em></span>
+        </a>
+        <p class="footer-tagline">Plan wisely. Invest intently. Live fully.</p>
         <p>1000 Eleven South, Suite 3D<br>Columbia, IL 62236</p>
         <p>
-          Office: <a href="tel:+16182813444">(618) 281-3444</a><br>
-          Toll-Free: <a href="tel:+18448949822">(844) 894-9822</a><br>
+          Office <a href="tel:+16182813444">(618) 281-3444</a><br>
+          Toll-Free <a href="tel:+18448949822">(844) 894-9822</a><br>
           <a href="mailto:triada@lpl.com">triada@lpl.com</a>
         </p>
         <p class="social-links">
@@ -151,8 +205,8 @@
           <a href="https://www.facebook.com/TriadaAdvisors/" rel="noopener" target="_blank">Facebook</a>
         </p>
       </div>
-      <div>
-        <h2>Quick Links</h2>
+      <nav aria-label="Footer">
+        <h2>Explore</h2>
         <ul class="footer-links">
           <li><a href="/about-us/">About Us</a></li>
           <li><a href="/our-solutions/">Our Solutions</a></li>
@@ -162,8 +216,8 @@
           <li><a href="/events/">Events</a></li>
           <li><a href="/contact-us/">Contact</a></li>
         </ul>
-      </div>
-      <div>
+      </nav>
+      <nav aria-label="Resources">
         <h2>Resources</h2>
         <ul class="footer-links">
           <li><a href="https://brokercheck.finra.org/" rel="noopener" target="_blank">FINRA BrokerCheck</a></li>
@@ -173,7 +227,7 @@
           <li><a href="https://www.finra.org/" rel="noopener" target="_blank">FINRA</a></li>
           <li><a href="https://www.sipc.org/" rel="noopener" target="_blank">SIPC</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="container">
 
@@ -220,8 +274,60 @@
       var nav = document.getElementById('site-nav');
       btn.addEventListener('click', function () {
         var open = nav.classList.toggle('open');
+        btn.classList.toggle('is-open', open);
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+
+      var header = document.getElementById('site-header');
+      var onScroll = function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 8);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var revealables = document.querySelectorAll('.reveal');
+      if (!reduced && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealables.forEach(function (el) { io.observe(el); });
+      } else {
+        revealables.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      var counters = document.querySelectorAll('[data-count]');
+      var animate = function (el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        var start = null;
+        var dur = 1400;
+        var step = function (ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      if (!reduced && 'IntersectionObserver' in window) {
+        var cio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { animate(e.target); cio.unobserve(e.target); }
+          });
+        }, { threshold: 0.5 });
+        counters.forEach(function (el) { cio.observe(el); });
+      } else {
+        counters.forEach(function (el) {
+          el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+        });
+      }
     })();
   </script>
 </body>
